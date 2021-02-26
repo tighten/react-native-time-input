@@ -1,0 +1,29 @@
+{
+  "name": "react-native-time-input",
+  "version": "1.0.0",
+  "description": "A simple time input component",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tighten/react-native-time-input.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "react",
+    "native",
+    "time",
+    "input",
+    "input",
+    "time"
+  ],
+  "author": "Tammy Robinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tighten/react-native-time-input/issues"
+  },
+  "homepage": "https://github.com/tighten/react-native-time-input#readme"
+}
