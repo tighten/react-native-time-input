@@ -25,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/tighten/react-native-time-input/issues"
   },
-  "homepage": "https://github.com/tighten/react-native-time-input#readme"
+  "homepage": "https://github.com/tighten/react-native-time-input#readme",
+  "dependencies": {
+    "date-fns": "^2.19.0",
+    "lodash": "^4.17.21"
+  }
 }
