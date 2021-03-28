@@ -24,17 +24,17 @@ import TimeInput from '@tighten/react-native-time-input';
 const MyApp = () => {
   const [time, setTime] = useState('');
 
-  const handleTimeChange = (value, valueIsValid) => {
-    if (!valueIsValid) return;
+  const handleTimeChange = (time, validTime) => {
+    if (!validTime) return;
 
-    setTime(value);
+    setTime(time);
   }
 
   return (
     <View>
       <TimeInput 
         setCurrentTime 
-        onTimeChange={(time, isValidTime) => handleTimeChange(time, isValidTime)} 
+        onTimeChange={handleTimeChange} 
       />
 
       <Text>Current time entered is: {time}</Text>
@@ -53,8 +53,8 @@ Lorem ipsum dolor.
 | `theme` |  | object | See the [customization](#customization) section below for configuration instructions |
 | `styles` |  | object | See the [customization](#customization) section below for configuration instructions |
 | `errorText` | "Entered time is invalid." | string | Override the message that when the user enters an invalid time.  |
-| `initialValue` | null | Date | Optionally set the  initial time for the input on first render. |
-| `setCurrentTime` | false | boolean | Decided if the input should load with the user's current time set as it's value. This prop is ignored when an `initialValue` is passed in. |
+| `initialTime` | null | Date | Optionally set the initial time for the input on first render. |
+| `setCurrentTime` | false | boolean | Decide if the input should load with the user's current time set as it's value. This prop is ignored when an `initialTime` is passed in. |
 | `onTimeChange` | | function | A callback function that runs when the value of the time input or meridiem is changed. Returns a locale time string (`hh:mm a`) and a boolean value specifying if the time is valid. |
 
 ## Customization
