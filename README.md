@@ -1,4 +1,6 @@
-# react-native-time-input
+# React Native Time Input
+
+This package works on both **Android** and **iOS**
 
 ## Preview
 
@@ -46,7 +48,6 @@ export default MyApp;
 ```
 
 ## Props
-Lorem ipsum dolor.
 
 | Prop         | Default     | Type        | Description |
 | ------------ | ----------- | ----------- | ----------- |
@@ -63,20 +64,20 @@ The look and feel of this component is completely customizable.
 
 ### Theme
 
-You can implement minimal changes to the look and feel by adjusting the default theme's hex values for different pieces of the component.
+You can implement minimal changes to the look and feel by adjusting the default theme's color values for elements inside the component. Hex color codes and named color text strings (e.g., blue) are valid values. 
 Here's what's available:
 
 | Prop        | Default    |
 | ----------- | ----------- |
-| `errorTextColor`| `#c0392b` | <span style="background-color: #c0392b; padding: 8px; display: block;"></span> |
-| `inputBackgroundColor`   | `#ffffff` | <span style="background-color: #ffffff; padding: 8px; display: block;"></span> |
-| `inputBorderColor`   | `#a6a6a6` | <span style="background-color: #a6a6a6; padding: 8px; display: block;"></span> |
-| `inputTextColor`   | `#2e2e2e` | <span style="background-color: #2e2e2e; padding: 8px; display: block;"></span> |
-| `toggleBackgroundColor` | `#e6e6e6` | <span style="background-color: #e6e6e6; padding: 8px; display: block;"></span> |
-| `toggleButtonActiveBackgroundColor` | `#a6a6a6` | <span style="background-color: #a6a6a6; padding: 8px; display: block;"></span> |
-| `toggleButtonActiveTextColor` | `#ffffff` | <span style="background-color: #ffffff; padding: 8px; display: block;"></span> |
-| `toggleButtonBackgroundColor` | `#ffffff` | <span style="background-color: #ffffff; padding: 8px; display: block;"></span> |
-| `toggleButtonTextColor` | `#2e2e2e` | <span style="background-color: #2e2e2e; padding: 8px; display: block;"></span> |
+| `errorTextColor`| `#c0392b` |
+| `inputBackgroundColor`   | `#ffffff` |
+| `inputBorderColor`   | `#a6a6a6` |
+| `inputTextColor`   | `#2e2e2e` |
+| `toggleBackgroundColor` | `#e6e6e6` |
+| `toggleButtonActiveBackgroundColor` | `#a6a6a6` |
+| `toggleButtonActiveTextColor` | `#ffffff` |
+| `toggleButtonBackgroundColor` | `#e6e6e6` |
+| `toggleButtonTextColor` | `#2e2e2e` |
 
 **Example**
 
