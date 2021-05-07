@@ -3,32 +3,38 @@ import TimeInput from '../lib/TimeInput';
 import { format } from 'date-fns';
 import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 
-describe('<TimeInput>', () => {
+describe('<TimeInput />', () => {
     beforeAll(() => {
         jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
         jest.useFakeTimers();
+        jest.advanceTimersByTime(1000);
     });
 
-    it('renders without an initial time set and setCurrentTime is set to false', async () => {
-        const { findByDisplayValue } = render(<TimeInput />);
-        const input = await findByDisplayValue('');
+    it('renders default elements', () => {
+        const { getAllByText, getByPlaceholderText } = render(<TimeInput />);
 
-        expect(input).toBeTruthy();
+        expect(getAllByText('AM')).toHaveLength(2);
+        expect(getAllByText('PM')).toHaveLength(1);
+        expect(getByPlaceholderText('08:00')).toBeTruthy();
     });
 
     it('renders with an initial time set', async () => {
-        const { findByDisplayValue } = render(<TimeInput initialTime={new Date('04/16/2021 12:15 PM')} />);
-        const input = await findByDisplayValue('12:15');
+        const { getAllByText, getByPlaceholderText } = render(
+            <TimeInput initialTime={new Date('04/16/2021 12:15 PM')} />
+        );
 
-        expect(input).toBeTruthy();
+        expect(getAllByText('AM')).toHaveLength(1);
+        expect(getAllByText('PM')).toHaveLength(2);
+        expect(getByPlaceholderText('08:00')).toBeTruthy();
     });
 
     it('renders with the current time set', async () => {
-        const { findByDisplayValue } = render(<TimeInput setCurrentTime />);
+        const { getAllByText, getByPlaceholderText } = render(<TimeInput setCurrentTime />);
         const date = format(new Date(), 'hh:mm a');
-        const input = await findByDisplayValue(date.split(' ')[0]);
+        const meridiem = date.split(' ')[1];
 
-        expect(input).toBeTruthy();
+        expect(getAllByText(meridiem)).toHaveLength(2);
+        expect(getByPlaceholderText('08:00')).toBeTruthy();
     });
 
     it('updates the time meridiem when AM is clicked', () => {
@@ -52,19 +58,34 @@ describe('<TimeInput>', () => {
     });
 
     it('renders an error message when the given time is invalid', () => {
-        const { getByText, getByDisplayValue, queryByText } = render(
-            <TimeInput initialTime={new Date('04/16/2021 12:15 PM')} />
+        const mockCallback = jest.fn();
+        const { getByDisplayValue, getByText } = render(
+            <TimeInput initialTime={new Date('04/16/2021 12:15 PM')} onTimeChange={mockCallback} />
         );
         const input = getByDisplayValue('12:15');
 
-        expect(queryByText('Entered time is invalid')).toBeFalsy();
+        fireEvent.changeText(input, '12');
+
+        expect(mockCallback).toBeCalled();
+        expect(input.props.value).toBe('12');
+        expect(getByText('Entered time is invalid.')).toBeTruthy();
+    });
+
+    it('renders a custom error message when the given time is invalid', () => {
+        const mockCallback = jest.fn();
+        const { getByDisplayValue, getByText } = render(
+            <TimeInput
+                initialTime={new Date('04/16/2021 12:15 PM')}
+                onTimeChange={mockCallback}
+                errorText="Sorry, your input is invalid."
+            />
+        );
+        const input = getByDisplayValue('12:15');
 
         fireEvent.changeText(input, '12');
 
+        expect(mockCallback).toBeCalled();
         expect(input.props.value).toBe('12');
-
-        jest.advanceTimersByTime(1000);
-
-        expect(getByText(/Entered time is invalid./)).toBeTruthy();
+        expect(getByText('Sorry, your input is invalid.')).toBeTruthy();
     });
 });
