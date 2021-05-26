@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TimeInput from '../lib/TimeInput';
 import { format } from 'date-fns';
-import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 
 describe('<TimeInput />', () => {
     beforeAll(() => {
