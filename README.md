@@ -4,6 +4,8 @@ This package works on both **Android** and **iOS**
 
 ## Preview
 
+> TODO
+
 ## Installation
 
 You can install this package by running one of the following  commands:
@@ -130,3 +132,8 @@ export const MyApp = () => {
   )
 };
 ```
+
+## Todo
+- [ ] Add component preview
+- [ ] Add local development notes
+- [ ] Add testing notes
