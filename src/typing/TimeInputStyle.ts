@@ -4,10 +4,10 @@ import type {
 } from 'react-native';
 
 export default interface TimeInputStyle {
-  componentContainer?: ViewStyle;
-  container?: ViewStyle;
-  input?: TextStyle;
-  toggle?: ViewStyle;
-  toggleButton?: ViewStyle;
-  toggleButtonActive?: ViewStyle;
+  componentContainer: ViewStyle;
+  container: ViewStyle;
+  input: TextStyle;
+  toggle: ViewStyle;
+  toggleButton: ViewStyle;
+  toggleButtonActive: ViewStyle;
 }

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import type TimeInputProps from './typing/TimeInputProps';
 import type TimeInputStyle from './typing/TimeInputStyle';
 import type TimeInputTheme from './typing/TimeInputTheme';
 import defaultTheme from './utils/theme';
 import defaultStyles from './utils/style';
 
-const TimeInput = ({
-  errorText = null,
-  initialTime = null,
-  onTimeChange = () => {},
-  setCurrentTime = false,
-  styles,
-  theme,
-}: TimeInputProps): JSX.Element | null => {
+export default function TimeInput (
+  {
+    errorText = null,
+    initialTime = null,
+    onTimeChange = () => {},
+    setCurrentTime = false,
+    styles,
+    theme,
+  }: TimeInputProps
+): JSX.Element | null {
   const [componentReady, setComponentReady] = useState<boolean>(false);
   const [componentTheme, setComponentTheme] = useState<TimeInputTheme | null>(null);
   const [componentStyle, setComponentStyle] = useState<TimeInputStyle | null>(null);
@@ -30,11 +32,24 @@ const TimeInput = ({
   }, [styles, theme, setComponentStyle, setComponentTheme]);
 
 
-  if (!componentReady) return null;
+  if (!componentReady || !componentStyle || !componentTheme) return null;
 
   return (
-    <Text>Time Input Component</Text>
+    <View style={componentStyle.componentContainer}>
+      <View style={componentStyle.container}>
+        <TextInput
+          keyboardType="number-pad"
+          maxLength={5}
+          onChangeText={(text) => {}}
+          placeholder="08:00"
+          value=""
+          style={StyleSheet.flatten([componentStyle.input, {
+            backgroundColor: componentTheme.inputBackgroundColor,
+            borderColor: componentTheme.inputBorderColor,
+            color: componentTheme.inputTextColor,
+          }])}
+        />
+      </View>
+    </View>
   );
-};
-
-export default TimeInput;
+}

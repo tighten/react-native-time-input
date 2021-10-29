@@ -4,15 +4,8 @@ import { StyleSheet, View, Text } from 'react-native';
 import TimeInput from 'react-native-time-input';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    setResult(3 * 7);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
       <TimeInput />
     </View>
   );
