@@ -1,18 +1,19 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-time-input';
+import TimeInput from 'react-native-time-input';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    setResult(3 * 7);
   }, []);
 
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
+      <TimeInput />
     </View>
   );
 }
