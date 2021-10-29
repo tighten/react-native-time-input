@@ -1,8 +1,0 @@
-cache/*
-__tests__
-example
-example/**/*
-.prettierrc.json
-
-jest.config.js
-

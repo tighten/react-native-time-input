@@ -1,0 +1,22 @@
+{
+  "name": "react-native-time-input-example",
+  "displayName": "TimeInput Example",
+  "expo": {
+    "name": "react-native-time-input-example",
+    "slug": "react-native-time-input-example",
+    "description": "Example app for react-native-time-input",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
