@@ -29,7 +29,7 @@ export default function TimeInput (
 
   useEffect((): void => {
     setComponentStyle(StyleSheet.create(_.merge({}, defaultStyles, styles)));
-    setComponentTheme(_.assign(defaultTheme, theme));
+    setComponentTheme(_.assign({}, defaultTheme, theme));
   }, [styles, theme, setComponentStyle, setComponentTheme]);
 
 
