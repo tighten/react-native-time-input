@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
 import type TimeInputStyle from 'src/typing/TimeInputStyle';
 
-export default StyleSheet.create<TimeInputStyle>({
+export default {
   componentContainer: {},
   container: {
     alignItems: 'center',
@@ -41,4 +40,4 @@ export default StyleSheet.create<TimeInputStyle>({
     position: 'absolute',
     top: -1,
   },
-});
+} as TimeInputStyle;

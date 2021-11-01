@@ -1,3 +1,5 @@
+import type TimeInputTheme from 'src/typing/TimeInputTheme';
+
 export const colors = {
   black: '#2e2e2e',
   blue: '#2980b9',
@@ -18,4 +20,4 @@ export default {
   toggleButtonActiveTextColor: colors.white,
   toggleButtonBackground: colors.offWhite,
   toggleButtonTextColor: colors.black,
-}
+} as TimeInputTheme;

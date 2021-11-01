@@ -5,6 +5,7 @@ import type TimeInputStyle from './typing/TimeInputStyle';
 import type TimeInputTheme from './typing/TimeInputTheme';
 import defaultTheme from './utils/theme';
 import defaultStyles from './utils/style';
+import _ from 'lodash';
 
 export default function TimeInput (
   {
@@ -27,8 +28,8 @@ export default function TimeInput (
   }, [componentStyle, componentTheme, setComponentReady]);
 
   useEffect((): void => {
-    setComponentStyle(StyleSheet.flatten([defaultStyles, styles]));
-    setComponentTheme(StyleSheet.flatten([defaultTheme, theme]));
+    setComponentStyle(StyleSheet.create(_.merge({}, defaultStyles, styles)));
+    setComponentTheme(_.assign(defaultTheme, theme));
   }, [styles, theme, setComponentStyle, setComponentTheme]);
 
 
@@ -40,14 +41,14 @@ export default function TimeInput (
         <TextInput
           keyboardType="number-pad"
           maxLength={5}
-          onChangeText={(text) => {}}
+          onChangeText={(text: string) => {}}
           placeholder="08:00"
           value=""
-          style={StyleSheet.flatten([componentStyle.input, {
+          style={[componentStyle.input, {
             backgroundColor: componentTheme.inputBackgroundColor,
             borderColor: componentTheme.inputBorderColor,
             color: componentTheme.inputTextColor,
-          }])}
+          }]}
         />
       </View>
     </View>
