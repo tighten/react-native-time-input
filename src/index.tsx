@@ -4,6 +4,8 @@ import TimeTextField from './components/TimeTextField';
 import _ from 'lodash';
 import defaultStyles from './utils/style';
 import defaultTheme from './utils/theme';
+import getLocaleTimeString from './helpers/getLocaleTimeString';
+import parseLocaleTimeString from './helpers/parseLocaleTimeString';
 import type TimeInputProps from './typing/TimeInputProps';
 import type TimeInputStyle from './typing/TimeInputStyle';
 import type TimeInputTheme from './typing/TimeInputTheme';
@@ -24,7 +26,10 @@ export default function TimeInput (
   const [componentTheme, setComponentTheme] = useState<TimeInputTheme | null>(null);
   const [componentStyle, setComponentStyle] = useState<TimeInputStyle | null>(null);
   const [componentErrorText, setComponentErrorText] = useState<string>('Please enter a valid time.');
+  const [currentLocaleTime, setCurrentLocaleTime] = useState<string>(getLocaleTimeString());
   const [validTime, setValidTime] = useState<boolean>(true);
+
+  const [time, setTime] = useState('');
 
   // Init component after setting the theme and styles
   useEffect((): void => {
@@ -45,6 +50,12 @@ export default function TimeInput (
 
   const handleTimeValueReady = (isValid: boolean): void => {
     if (initialRender.current) {
+      if (initialTime) {
+        // parseLocaleTimeString(getLocaleTimeString(initialTime));
+      } else if (!initialTime && setCurrentTime) {
+        setTime(parseLocaleTimeString(currentLocaleTime)[0]);
+      }
+
       initialRender.current = false;
       return;
     }
@@ -58,6 +69,7 @@ export default function TimeInput (
     <View style={componentStyle.componentContainer}>
       <View style={componentStyle.container}>
         <TimeTextField 
+          givenTime={time}
           style={[componentStyle.input, {
             backgroundColor: componentTheme.inputBackgroundColor,
             borderColor: componentTheme.inputBorderColor,

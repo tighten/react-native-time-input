@@ -5,6 +5,7 @@ import useDebounce from '../hooks/useDebounce';
 type TimeTextFieldProps = {
   style: TextStyle[];
   onTimeValueReady: Function;
+  givenTime: string;
 }
 
 const maskTimeValue = (value: string): string => {
@@ -35,6 +36,10 @@ export default function TimeTextField(props: TimeTextFieldProps): JSX.Element {
     state: debouncedTime,
     setDebouncedState: setDebouncedTime,
   } = useDebounce(time, 250);
+
+  useEffect(() => {
+    setTime(props.givenTime);
+  }, [props.givenTime, setTime]);
 
   useEffect((): void => {
     props.onTimeValueReady(isTimeValueValid(debouncedTime));
