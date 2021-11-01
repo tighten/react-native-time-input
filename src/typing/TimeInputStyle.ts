@@ -10,4 +10,5 @@ export default interface TimeInputStyle {
   toggle: ViewStyle;
   toggleButton: ViewStyle;
   toggleButtonActive: ViewStyle;
+  errorText: TextStyle;
 }

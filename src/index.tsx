@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import TimeTextField from './components/TimeTextField';
+import _ from 'lodash';
+import defaultStyles from './utils/style';
+import defaultTheme from './utils/theme';
 import type TimeInputProps from './typing/TimeInputProps';
 import type TimeInputStyle from './typing/TimeInputStyle';
 import type TimeInputTheme from './typing/TimeInputTheme';
-import defaultTheme from './utils/theme';
-import defaultStyles from './utils/style';
-import _ from 'lodash';
 
 export default function TimeInput (
   {
-    errorText = null,
+    errorText = 'Entered time is invalid.',
     initialTime = null,
     onTimeChange = () => {},
     setCurrentTime = false,
@@ -17,9 +18,11 @@ export default function TimeInput (
     theme,
   }: TimeInputProps
 ): JSX.Element | null {
+  const initialRender = useRef(true);
   const [componentReady, setComponentReady] = useState<boolean>(false);
   const [componentTheme, setComponentTheme] = useState<TimeInputTheme | null>(null);
   const [componentStyle, setComponentStyle] = useState<TimeInputStyle | null>(null);
+  const [validTime, setValidTime] = useState<boolean>(true);
 
   // Init component after setting the theme and styles
   useEffect((): void => {
@@ -32,25 +35,38 @@ export default function TimeInput (
     setComponentTheme(_.assign({}, defaultTheme, theme));
   }, [styles, theme, setComponentStyle, setComponentTheme]);
 
+  const handleTimeValueReady = (isValid: boolean): void => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+
+    setValidTime(isValid);
+  }
+
 
   if (!componentReady || !componentStyle || !componentTheme) return null;
 
   return (
     <View style={componentStyle.componentContainer}>
       <View style={componentStyle.container}>
-        <TextInput
-          keyboardType="number-pad"
-          maxLength={5}
-          onChangeText={(text: string) => {}}
-          placeholder="08:00"
-          value=""
+        <TimeTextField 
           style={[componentStyle.input, {
             backgroundColor: componentTheme.inputBackgroundColor,
             borderColor: componentTheme.inputBorderColor,
             color: componentTheme.inputTextColor,
           }]}
+          onTimeValueReady={handleTimeValueReady}
         />
       </View>
+
+      <Text 
+        style={[componentStyle.errorText, {
+          color: componentTheme.errorTextColor,
+        }]}
+      >
+        { validTime ? '' : errorText }
+      </Text>
     </View>
   );
 }

@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import _ from 'lodash';
 
-export default (obj = null, wait = 1000) => {
+export default (obj: string = '', wait: number = 1000) => {
     const [state, setState] = useState(obj);
 
-    const setDebouncedState = (value: any) => {
+    const setDebouncedState = (value: string) => {
         debounce(value);
     };
 
@@ -15,5 +15,5 @@ export default (obj = null, wait = 1000) => {
         []
     );
 
-    return [state, setDebouncedState];
+    return {state, setDebouncedState};
 };

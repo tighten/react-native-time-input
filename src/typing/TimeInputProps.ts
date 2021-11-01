@@ -3,7 +3,7 @@ import type TimeInputTheme from './TimeInputTheme';
 
 
 export default interface TimeInputProps {
-  errorText?: String | null;
+  errorText?: String;
   initialTime?: Date | null;
   onTimeChange?: Function;
   setCurrentTime?: Boolean;

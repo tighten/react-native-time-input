@@ -40,4 +40,7 @@ export default {
     position: 'absolute',
     top: -1,
   },
+  errorText: {
+    marginTop: 10,
+  },
 } as TimeInputStyle;
