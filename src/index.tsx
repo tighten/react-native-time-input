@@ -10,18 +10,20 @@ import type TimeInputTheme from './typing/TimeInputTheme';
 
 export default function TimeInput (
   {
-    errorText = 'Entered time is invalid.',
+    errorText = null,
+    showErrorText = true,
     initialTime = null,
     onTimeChange = () => {},
     setCurrentTime = false,
-    styles,
-    theme,
+    styles = defaultStyles,
+    theme = defaultTheme,
   }: TimeInputProps
 ): JSX.Element | null {
   const initialRender = useRef(true);
   const [componentReady, setComponentReady] = useState<boolean>(false);
   const [componentTheme, setComponentTheme] = useState<TimeInputTheme | null>(null);
   const [componentStyle, setComponentStyle] = useState<TimeInputStyle | null>(null);
+  const [componentErrorText, setComponentErrorText] = useState<string>('Please enter a valid time.');
   const [validTime, setValidTime] = useState<boolean>(true);
 
   // Init component after setting the theme and styles
@@ -35,6 +37,12 @@ export default function TimeInput (
     setComponentTheme(_.assign({}, defaultTheme, theme));
   }, [styles, theme, setComponentStyle, setComponentTheme]);
 
+  // set error text
+  useEffect(() => {
+    if (!errorText) return;
+    setComponentErrorText(errorText);
+  }, [errorText, setComponentErrorText]);
+
   const handleTimeValueReady = (isValid: boolean): void => {
     if (initialRender.current) {
       initialRender.current = false;
@@ -43,7 +51,6 @@ export default function TimeInput (
 
     setValidTime(isValid);
   }
-
 
   if (!componentReady || !componentStyle || !componentTheme) return null;
 
@@ -60,13 +67,15 @@ export default function TimeInput (
         />
       </View>
 
-      <Text 
-        style={[componentStyle.errorText, {
-          color: componentTheme.errorTextColor,
-        }]}
-      >
-        { validTime ? '' : errorText }
-      </Text>
+      {showErrorText && 
+        <Text 
+          style={[componentStyle.errorText, {
+            color: componentTheme.errorTextColor,
+          }]}
+        >
+          { validTime ? '' : componentErrorText }
+        </Text>
+      }
     </View>
   );
 }

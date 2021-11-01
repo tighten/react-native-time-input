@@ -38,7 +38,7 @@ export default function TimeTextField(props: TimeTextFieldProps): JSX.Element {
 
   useEffect((): void => {
     props.onTimeValueReady(isTimeValueValid(debouncedTime));
-  }, [debouncedTime]);
+  }, [debouncedTime, props.onTimeValueReady, isTimeValueValid]);
 
   useEffect((): void => {
     setDebouncedTime(time);
