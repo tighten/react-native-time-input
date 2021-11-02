@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 import TimeTextField from './components/TimeTextField';
 import _ from 'lodash';
+import Toggle, { ToggleButton } from './components/Toggle';
 import defaultStyles from './utils/style';
 import defaultTheme from './utils/theme';
 import getLocaleTimeString from './helpers/getLocaleTimeString';
@@ -9,6 +10,7 @@ import parseLocaleTimeString from './helpers/parseLocaleTimeString';
 import type TimeInputProps from './typing/TimeInputProps';
 import type TimeInputStyle from './typing/TimeInputStyle';
 import type TimeInputTheme from './typing/TimeInputTheme';
+import type TimeParts from './typing/TimeParts';
 
 export default function TimeInput (
   {
@@ -21,15 +23,43 @@ export default function TimeInput (
     theme = defaultTheme,
   }: TimeInputProps
 ): JSX.Element | null {
-  const initialRender = useRef(true);
+  const animation = useRef(new Animated.Value(0)).current;
   const [componentReady, setComponentReady] = useState<boolean>(false);
   const [componentTheme, setComponentTheme] = useState<TimeInputTheme | null>(null);
   const [componentStyle, setComponentStyle] = useState<TimeInputStyle | null>(null);
   const [componentErrorText, setComponentErrorText] = useState<string>('Please enter a valid time.');
-  const [currentLocaleTime, setCurrentLocaleTime] = useState<string>(getLocaleTimeString());
+  const [currentLocaleTime] = useState<string>(getLocaleTimeString());
+  const [currentLocaleTimeParsed] = useState<TimeParts>(parseLocaleTimeString(currentLocaleTime));
+  const [initialTimeParsed] = useState<TimeParts | null>(
+    (): TimeParts | null => !initialTime ? null : parseLocaleTimeString(getLocaleTimeString(initialTime))
+  );
+
+  const getGivenTime = (): TimeParts | null => {
+    if (initialTime && initialTimeParsed) return initialTimeParsed;
+    return setCurrentTime ? currentLocaleTimeParsed : null;
+  };
+
+  const [meridiem, setMeridiem] = useState<string>(() => {
+    let gt = getGivenTime();
+    return !gt ? currentLocaleTimeParsed.meridiem : gt.meridiem;
+  });
+  const [time, setTime] = useState<string>('');
   const [validTime, setValidTime] = useState<boolean>(true);
 
-  const [time, setTime] = useState('');
+  const handleTimeValueReady = (isValid: boolean, updated: string): void => {
+    // TODO: call onTimeChange here?
+    setTime(updated);
+    setValidTime(isValid);
+  }
+
+  const handleMeridiemChange = () => {
+    Animated.timing(animation, {
+      toValue: meridiem === 'PM' ? 40 : 0,
+      delay: 0,
+      duration: 225,
+      useNativeDriver: true,
+    }).start();
+  };
 
   // Init component after setting the theme and styles
   useEffect((): void => {
@@ -42,34 +72,23 @@ export default function TimeInput (
     setComponentTheme(_.assign({}, defaultTheme, theme));
   }, [styles, theme, setComponentStyle, setComponentTheme]);
 
-  // set error text
   useEffect(() => {
     if (!errorText) return;
     setComponentErrorText(errorText);
   }, [errorText, setComponentErrorText]);
 
-  const handleTimeValueReady = (isValid: boolean): void => {
-    if (initialRender.current) {
-      if (initialTime) {
-        // parseLocaleTimeString(getLocaleTimeString(initialTime));
-      } else if (!initialTime && setCurrentTime) {
-        setTime(parseLocaleTimeString(currentLocaleTime)[0]);
-      }
-
-      initialRender.current = false;
-      return;
-    }
-
-    setValidTime(isValid);
-  }
+  useEffect(() => {
+    handleMeridiemChange();
+    return () => animation.stopAnimation();
+  }, [meridiem, setMeridiem]);
 
   if (!componentReady || !componentStyle || !componentTheme) return null;
 
   return (
     <View style={componentStyle.componentContainer}>
       <View style={componentStyle.container}>
-        <TimeTextField 
-          givenTime={time}
+        <TimeTextField
+          givenTime={getGivenTime()}
           style={[componentStyle.input, {
             backgroundColor: componentTheme.inputBackgroundColor,
             borderColor: componentTheme.inputBorderColor,
@@ -77,6 +96,51 @@ export default function TimeInput (
           }]}
           onTimeValueReady={handleTimeValueReady}
         />
+
+        <Toggle toggleStyles={[componentStyle.toggle, {
+          backgroundColor: componentTheme.toggleBackgroundColor,
+        }]}>
+          <ToggleButton 
+            toggleButtonStyles={[componentStyle.toggleButton, {
+              backgroundColor: componentTheme.toggleButtonBackground,
+            }]}
+            onPress={() => setMeridiem('AM')}
+          >
+            <Text style={{
+              color: componentTheme.toggleButtonTextColor,
+            }}>
+              AM
+            </Text>
+          </ToggleButton>
+
+          <ToggleButton 
+            toggleButtonStyles={[componentStyle.toggleButton, {
+              backgroundColor: componentTheme.toggleButtonBackground,
+            }]}
+            onPress={() => setMeridiem('PM')}
+          >
+            <Text style={{
+              color: componentTheme.toggleButtonTextColor,
+            }}>
+              PM
+            </Text>
+          </ToggleButton>
+
+          <ToggleButton activeButton toggleButtonStyles={[
+            componentStyle.toggleButton,
+            componentStyle.toggleButtonActive,
+            {
+              backgroundColor: componentTheme.toggleButtonActiveBackgroundColor,
+              transform: [{ translateX: animation }]
+            }
+          ]}>
+            <Text style={{
+              color: componentTheme.toggleButtonTextColor,
+            }}>
+              {meridiem}
+            </Text>
+          </ToggleButton>
+        </Toggle>
       </View>
 
       {showErrorText && 

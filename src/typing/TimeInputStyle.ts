@@ -2,6 +2,7 @@ import type {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import type AnimatedViewStyle from './AnimatedViewStyle';
 
 export default interface TimeInputStyle {
   componentContainer: ViewStyle;
@@ -9,6 +10,6 @@ export default interface TimeInputStyle {
   input: TextStyle;
   toggle: ViewStyle;
   toggleButton: ViewStyle;
-  toggleButtonActive: ViewStyle;
+  toggleButtonActive: AnimatedViewStyle | ViewStyle;
   errorText: TextStyle;
 }
