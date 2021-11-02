@@ -53,12 +53,12 @@ export default MyApp;
 
 | Prop         | Default     | Type        | Description |
 | ------------ | ----------- | ----------- | ----------- |
-| `theme` |  | object | See the [customization](#customization) section below for configuration instructions |
-| `styles` |  | object | See the [customization](#customization) section below for configuration instructions |
-| `errorText` | "Please enter a valid time." | string | Override the message that when the user enters an invalid time.  |
-| `initialTime` | null | Date | Optionally set the initial time for the input on first render. |
-| `setCurrentTime` | false | boolean | Decide if the input should load with the user's current time set as it's value. This prop is ignored when an `initialTime` is passed in. |
-| `onTimeChange` | | function | A callback function that runs when the value of the time input or meridiem is changed. Returns a locale time string (`hh:mm a`) and a boolean value specifying if the time is valid. |
+| `theme` |  | `TimeInputTheme` | See the [customization](#customization) section below for configuration instructions |
+| `styles` |  | `TimeInputStyle` | See the [customization](#customization) section below for configuration instructions |
+| `errorText` | "Please enter a valid time." | string | The message that is displayed when the user enters an invalid time.  |
+| `initialTime` | `null` | Date | Optionally set the initial time for the input on first render. |
+| `setCurrentTime` | `false` | boolean | Decide if the input should load with the user's current time set as it's value. This prop is ignored when an `initialTime` is passed in. |
+| `onTimeChange` | `(localeTime, isValid) => {}` | function | A callback function that runs when the value of the time input or meridiem is changed. Receives a locale time string (`hh:mm a`) and a boolean value specifying if the time is valid. |
 
 ## Customization
 
@@ -100,6 +100,8 @@ export const MyApp = () => {
 ```
 
 ### Styles
+
+> Note: Theme overrides take precedent over all other styles.
 
 If you want to make adjustments to the component's layout, you can pass in a style object to override the default styles.
 
