@@ -8,7 +8,7 @@ export const colors = {
   offWhite: '#e6e6e6',
   red: '#c0392b',
   white: '#ffffff',
-}
+};
 
 export default {
   errorTextColor: colors.red,

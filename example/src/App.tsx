@@ -7,9 +7,9 @@ export default function App() {
   const [time, setTime] = React.useState<string>('');
   const [valid, setValid] = React.useState<boolean>(true);
 
-  const handleOnTimeChange = (time: string, valid: boolean): void =>  {
-    setTime(time);
-    setValid(valid);
+  const handleOnTimeChange = (newTime: string, isValid: boolean): void => {
+    setTime(newTime);
+    setValid(isValid);
   };
 
   return (
@@ -19,7 +19,7 @@ export default function App() {
         initialTime={new Date().getTime()}
       />
 
-      { (valid && Boolean(time.length)) && <Text>Set time: {time}</Text> }
+      {Boolean(time.length) && valid && <Text>Set time: {time}</Text>}
     </View>
   );
 }

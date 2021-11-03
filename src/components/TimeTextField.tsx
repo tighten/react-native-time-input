@@ -8,7 +8,7 @@ type TimeTextFieldProps = {
   style: TextStyle[];
   onTimeValueReady: Function;
   givenTime: TimeParts | null;
-}
+};
 
 export default function TimeTextField({
   givenTime,
@@ -16,10 +16,8 @@ export default function TimeTextField({
   style,
 }: TimeTextFieldProps): JSX.Element {
   const [time, setTime] = useState<string>('');
-  const {
-    state: debouncedTime,
-    setDebouncedState: setDebouncedTime,
-  } = useDebounce(time, 250);
+  const { state: debouncedTime, setDebouncedState: setDebouncedTime } =
+    useDebounce(time, 250);
 
   useEffect(() => {
     if (!givenTime) return;

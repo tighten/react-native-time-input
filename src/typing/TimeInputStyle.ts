@@ -1,7 +1,4 @@
-import type {
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 import type AnimatedViewStyle from './AnimatedViewStyle';
 
 export default interface TimeInputStyle {

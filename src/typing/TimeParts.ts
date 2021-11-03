@@ -5,6 +5,6 @@ enum ETimeParts {
 
 type TimeParts = {
   [key in ETimeParts]: string;
-}
+};
 
 export default TimeParts;
