@@ -88,7 +88,9 @@ export default function TimeInput (
       return;
     }
 
-    onTimeChange(`${time} ${meridiem}`, validTime);
+    time.length 
+      ? onTimeChange(`${time} ${meridiem}`, validTime)
+      : onTimeChange('', validTime);
   }, [time, meridiem, validTime, onTimeChange])
 
   if (!componentReady || !componentStyle || !componentTheme) return null;

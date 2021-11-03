@@ -1,16 +1,25 @@
 import * as React from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import TimeInput from 'react-native-time-input';
 
 export default function App() {
+  const [time, setTime] = React.useState<string>('');
+  const [valid, setValid] = React.useState<boolean>(true);
+
+  const handleOnTimeChange = (time: string, valid: boolean): void =>  {
+    setTime(time);
+    setValid(valid);
+  };
+
   return (
     <View style={styles.container}>
       <TimeInput
-        errorText="Custom error text."
-        onTimeChange={(time, valid) => console.log(time, valid)}
+        onTimeChange={handleOnTimeChange}
         initialTime={new Date().getTime()}
       />
+
+      { (valid && Boolean(time.length)) && <Text>Set time: {time}</Text> }
     </View>
   );
 }
