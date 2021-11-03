@@ -123,7 +123,7 @@ If you want to make adjustments to the component's layout, you can pass in a sty
 | `toggle`   | A wrapper `View` element that surrounds the meridiem toggle and buttons |
 | `toggleButton` | The `TouchableOpacity` (iOS) or `TouchableNativeFeedback` (Android) element for AM and PM |
 | `toggleButtonActive` | An `Animated.View` element |
-| `errorText` | The `Text` field displayed belowed the input when there are errors |
+| `errorText` | The `Text` field displayed below the input when there are errors |
 
 **Example**
 
