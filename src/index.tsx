@@ -144,7 +144,7 @@ export default function TimeInput (
             }
           ]}>
             <Text style={{
-              color: componentTheme.toggleButtonTextColor,
+              color: componentTheme.toggleButtonActiveTextColor,
             }}>
               {meridiem}
             </Text>

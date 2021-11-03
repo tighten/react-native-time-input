@@ -1,12 +1,16 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import TimeInput from 'react-native-time-input';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <TimeInput />
+      <TimeInput
+        errorText="Custom error text."
+        onTimeChange={(time, valid) => console.log(time, valid)}
+        initialTime={new Date().getTime()}
+      />
     </View>
   );
 }
@@ -16,10 +20,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
   },
 });

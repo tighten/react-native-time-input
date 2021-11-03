@@ -1,10 +1,20 @@
-# React Native Time Input
+# React Native Time Input 🕓
 
 This package works on both **Android** and **iOS**
 
 ## Preview
 
 > TODO
+
+## Try it out
+
+You can run the example module by performing these steps:
+
+```
+$ git clone git@github.com:tighten/react-native-time-input.git
+$ yarn
+$ yarn example start
+```
 
 ## Installation
 
