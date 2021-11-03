@@ -4,7 +4,7 @@ This package works on both **Android** and **iOS**
 
 ## Preview
 
-> TODO
+![React Native Time Input Preview](preview.gif)
 
 ## Try it out
 
