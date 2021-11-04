@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 
 export default function getLocaleTimeString(
-  dateTimeString: string | null = null
+  dateTimeString: Date | null = null
 ): string {
   return format(
     dateTimeString ? new Date(dateTimeString) : new Date(),

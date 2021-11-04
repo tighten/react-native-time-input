@@ -3,8 +3,6 @@ enum ETimeParts {
   meridiem = 'meridiem',
 }
 
-type TimeParts = {
+export type TimeParts = {
   [key in ETimeParts]: string;
 };
-
-export default TimeParts;

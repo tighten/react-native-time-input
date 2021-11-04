@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, TextStyle } from 'react-native';
 import * as TimeInputHelper from '../helpers/timeInput';
-import type TimeParts from 'src/typing/TimeParts';
+import type { TimeParts } from 'src/typing/TimeParts';
 import useDebounce from '../hooks/useDebounce';
 
 type TimeTextFieldProps = {

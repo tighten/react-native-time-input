@@ -1,8 +1,6 @@
-import type TimePartsType from '../typing/TimeParts';
+import type { TimeParts } from '../typing/TimeParts';
 
-export default function parseLocaleTimeString(
-  localeTime: string
-): TimePartsType {
+export default function parseLocaleTimeString(localeTime: string): TimeParts {
   let arr = localeTime.split(' ');
   return {
     time: arr[0],

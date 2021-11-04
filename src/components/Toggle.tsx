@@ -7,7 +7,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import type AnimatedViewStyle from 'src/typing/AnimatedViewStyle';
+import type { AnimatedViewStyle } from 'src/typing/AnimatedViewStyle';
 
 type ToggleProps = {
   children?: JSX.Element | JSX.Element[];

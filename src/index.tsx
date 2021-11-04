@@ -10,7 +10,7 @@ import parseLocaleTimeString from './helpers/parseLocaleTimeString';
 import type TimeInputProps from './typing/TimeInputProps';
 import type TimeInputStyle from './typing/TimeInputStyle';
 import type TimeInputTheme from './typing/TimeInputTheme';
-import type TimeParts from './typing/TimeParts';
+import type { TimeParts } from './typing/TimeParts';
 
 export default function TimeInput({
   errorText = null,
