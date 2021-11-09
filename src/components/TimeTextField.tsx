@@ -16,8 +16,11 @@ export default function TimeTextField({
   style,
 }: TimeTextFieldProps): JSX.Element {
   const [time, setTime] = useState<string>('');
-  const { state: debouncedTime, setDebouncedState: setDebouncedTime } =
-    useDebounce(time, 250);
+  const {
+    state: debouncedTime,
+    setDebouncedState: setDebouncedTime,
+    debounce,
+  } = useDebounce(time, 250);
 
   useEffect(() => {
     if (!givenTime) return;
@@ -28,9 +31,13 @@ export default function TimeTextField({
     onTimeValueReady(TimeInputHelper.validate(debouncedTime), debouncedTime);
   }, [debouncedTime, onTimeValueReady]);
 
-  useEffect((): void => {
+  useEffect((): (() => void) => {
     setDebouncedTime(time);
-  }, [time, setDebouncedTime]);
+
+    return () => {
+      debounce.cancel();
+    };
+  }, [debounce, time, setDebouncedTime]);
 
   return (
     <TextInput

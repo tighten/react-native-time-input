@@ -16,7 +16,7 @@ export default function App() {
     <View style={styles.container}>
       <TimeInput
         onTimeChange={handleOnTimeChange}
-        initialTime={new Date().getTime()}
+        initialTime={new Date('1/1/2020 11:35 AM')}
       />
 
       {Boolean(time.length) && valid && <Text>Set time: {time}</Text>}

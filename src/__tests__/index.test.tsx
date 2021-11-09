@@ -1,16 +1,17 @@
 import React from 'react';
 import TimeInput from 'react-native-time-input';
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import { format } from 'date-fns';
 
 describe('<TimeInput />', () => {
   let d: Date;
 
-  beforeAll(() => {
+  beforeEach(() => {
     d = new Date();
     d.setHours(0, 0, 0, 0);
 
     jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+    jest.mock('lodash/debounce', () => jest.fn((fn) => fn));
     jest.useFakeTimers('modern');
     jest.setSystemTime(d);
   });
@@ -78,9 +79,10 @@ describe('<TimeInput />', () => {
     );
     const input = getByDisplayValue('12:15');
 
-    fireEvent.changeText(input, '12');
-
-    jest.runAllTimers();
+    act(() => {
+      fireEvent.changeText(input, '12');
+      jest.runAllTimers();
+    });
 
     expect(input.props.value).toBe('12');
     expect(getByText('Please enter a valid time.')).toBeTruthy();
@@ -95,9 +97,10 @@ describe('<TimeInput />', () => {
     );
     const input = getByDisplayValue('12:15');
 
-    fireEvent.changeText(input, '12');
-
-    jest.runAllTimers();
+    act(() => {
+      fireEvent.changeText(input, '12');
+      jest.runAllTimers();
+    });
 
     expect(input.props.value).toBe('12');
     expect(getByText('Sorry, your input is invalid.')).toBeTruthy();

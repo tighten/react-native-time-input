@@ -88,7 +88,7 @@ export default function TimeInput({
   useEffect(() => {
     handleMeridiemChange();
     return () => animation.stopAnimation();
-  }, [meridiem, setMeridiem, animation, handleMeridiemChange]);
+  }, [meridiem, animation, handleMeridiemChange]);
 
   useEffect(() => {
     if (initialRender.current) {
