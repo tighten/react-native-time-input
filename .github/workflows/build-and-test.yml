@@ -28,7 +28,7 @@ jobs:
           cache-dependency-path: |
             ./yarn.lock
             ./example/yarn.lock
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           yarn install --cwd example --frozen-lockfile
           yarn install --frozen-lockfile
@@ -38,33 +38,37 @@ jobs:
     runs-on: macos-11
     needs: install-dependencies
     steps:
-      run: |
-        cd react-native-time-input/react-native-time-input
-        yarn lint
+      - name: Linting files
+        run: |
+          cd react-native-time-input/react-native-time-input
+          yarn lint
 
   typescript:
     name: Typecheck files
     runs-on: macos-11
     needs: install-dependencies
     steps:
-      run: |
-        cd react-native-time-input/react-native-time-input
-        yarn typescript
+      - name: Performing typecheck
+        run: |
+          cd react-native-time-input/react-native-time-input
+          yarn typescript
 
   unit-tests:
     name: Run unit tests
     runs-on: macos-11
     needs: install-dependencies
     steps:
-      run: |
-        cd react-native-time-input/react-native-time-input
-        yarn test --coverage
+      - name: Running unit tests
+        run: |
+          cd react-native-time-input/react-native-time-input
+          yarn test --coverage
 
   build-package:
     name: Build package
     runs-on: macos-11
     needs: install-dependencies
     steps:
-      run: |
-        cd react-native-time-input/react-native-time-input
-        yarn prepare
+      - name: Building the package
+        run: |
+          cd react-native-time-input/react-native-time-input
+          yarn prepare
