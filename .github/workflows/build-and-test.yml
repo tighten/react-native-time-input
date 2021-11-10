@@ -40,7 +40,7 @@ jobs:
     steps:
       - name: Linting files
         run: |
-          cd react-native-time-input/react-native-time-input
+          cd ./react-native-time-input
           yarn lint
 
   typescript:
@@ -50,7 +50,7 @@ jobs:
     steps:
       - name: Performing typecheck
         run: |
-          cd react-native-time-input/react-native-time-input
+          cd ./react-native-time-input
           yarn typescript
 
   unit-tests:
@@ -60,7 +60,7 @@ jobs:
     steps:
       - name: Running unit tests
         run: |
-          cd react-native-time-input/react-native-time-input
+          cd ./react-native-time-input
           yarn test --coverage
 
   build-package:
@@ -70,5 +70,5 @@ jobs:
     steps:
       - name: Building the package
         run: |
-          cd react-native-time-input/react-native-time-input
+          cd ./react-native-time-input
           yarn prepare
