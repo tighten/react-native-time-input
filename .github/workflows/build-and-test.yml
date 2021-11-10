@@ -38,25 +38,33 @@ jobs:
     runs-on: macos-11
     needs: install-dependencies
     steps:
-      - run: yarn lint
+      - run: |
+        cd react-native-time-input/react-native-time-input
+        yarn lint
 
   typescript:
     name: Typecheck files
     runs-on: macos-11
     needs: install-dependencies
     steps:
-      - run: yarn typescript
+      - run: |
+        cd react-native-time-input/react-native-time-input
+        yarn typescript
 
   unit-tests:
     name: Run unit tests
     runs-on: macos-11
     needs: install-dependencies
     steps:
-      - run: yarn test --coverage
+      - run: |
+        cd react-native-time-input/react-native-time-input
+        yarn test --coverage
 
   build-package:
     name: Build package
     runs-on: macos-11
     needs: install-dependencies
     steps:
-      - run: yarn prepare
+      - run: |
+        cd react-native-time-input/react-native-time-input
+        yarn prepare
