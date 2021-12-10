@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, Text, View } from 'react-native';
-import TimeInput from 'react-native-time-input';
+import TimeInput from '@tighten/react-native-time-input';
 
 export default function App() {
   const [time, setTime] = React.useState<string>('');

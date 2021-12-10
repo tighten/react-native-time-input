@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-time-input": ["./src/index"]
+      "@tighten/react-native-time-input": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

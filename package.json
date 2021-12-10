@@ -82,7 +82,10 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
-    ]
+    ],
+    "moduleNameMapper": {
+      "@tighten/react-native-time-input": ["<rootDir>/src/index"]
+    }
   },
   "commitlint": {
     "extends": [

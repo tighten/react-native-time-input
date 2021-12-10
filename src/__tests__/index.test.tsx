@@ -1,5 +1,5 @@
 import React from 'react';
-import TimeInput from 'react-native-time-input';
+import TimeInput from '@tighten/react-native-time-input';
 import { act, fireEvent, render } from '@testing-library/react-native';
 import { format } from 'date-fns';
 
