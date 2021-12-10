@@ -1,6 +1,6 @@
 {
-  "name": "react-native-time-input",
-  "version": "0.1.0",
+  "name": "@tightenco/react-native-time-input",
+  "version": "1.0.0",
   "description": "A simple time input component with autoformatting.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -45,6 +45,7 @@
   },
   "homepage": "https://github.com/tighten/react-native-time-input#readme",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
@@ -92,6 +93,7 @@
   "release-it": {
     "git": {
       "commitMessage": "chore: release ${version}",
+      "requireBranch": "main",
       "tagName": "v${version}"
     },
     "npm": {
