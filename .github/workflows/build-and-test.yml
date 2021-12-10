@@ -1,0 +1,49 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  typescript-lint:
+    name: Typecheck and Lint
+    continue-on-error: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Linting files
+        run: |
+          yarn
+          yarn lint
+      - name: Performing typecheck
+        run: |
+          yarn typescript
+
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    needs: typescript-lint
+    strategy:
+      matrix:
+        node: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'yarn'
+          cache-dependency-path: |
+            ./yarn.lock
+            ./example/yarn.lock
+      - name: Install dependencies      
+        run: |
+          yarn install --cwd example --frozen-lockfile
+          yarn install --frozen-lockfile
+      - name: Run unit tests and build
+        run: |
+          yarn test --coverage
+          yarn prepare
