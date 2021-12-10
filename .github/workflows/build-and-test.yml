@@ -8,32 +8,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  install-dependencies:
-    name: Install dependencies
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [16.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'yarn'
-          # cache-dependency-path: |
-          #   ./yarn.lock
-          #   ./example/yarn.lock
-      - name: Install dependencies
-        run: |
-          yarn install --cwd example --frozen-lockfile
-          yarn install --frozen-lockfile
-  
   typescript-lint:
     name: Typecheck and Lint
     continue-on-error: false
     runs-on: ubuntu-latest
-    needs: install-dependencies
     steps:
       - uses: actions/checkout@v2
       - name: Linting files
@@ -42,12 +20,12 @@ jobs:
           yarn lint
       - name: Performing typecheck
         run: |
-          cd ./
           yarn typescript
 
   build:
-    name: Build
+    name: Build and Test
     runs-on: ubuntu-latest
+    needs: typescript-lint
     strategy:
       matrix:
         node: [16.x]
@@ -58,12 +36,14 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
+          cache-dependency-path: |
+            ./yarn.lock
+            ./example/yarn.lock
       - name: Install dependencies      
         run: |
-          cd ./
           yarn install --cwd example --frozen-lockfile
           yarn install --frozen-lockfile
-      - name: Build & Test
+      - name: Run unit tests and build
         run: |
           yarn test --coverage
           yarn prepare
