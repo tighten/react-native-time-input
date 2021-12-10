@@ -4,7 +4,7 @@ This package works on both **Android** and **iOS**
 
 ## Preview
 
-![React Native Time Input Preview](preview.gif)
+![React Native Time Input Preview](https://github.com/tighten/react-native-time-input/blob/HEAD/preview.gif?raw=true)
 
 ## Try it out
 
