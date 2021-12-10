@@ -1,5 +1,5 @@
 {
-  "name": "@tightenco/react-native-time-input",
+  "name": "@tighten/react-native-time-input",
   "description": "A simple time input component with autoformatting.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
