@@ -1,5 +1,7 @@
 # React Native Time Input 🕓
 
+[![Lint, Build, and Test](https://github.com/tighten/react-native-time-input/workflows/Build%20and%20Test/badge.svg?branch=main)](https://github.com/tighten/react-native-time-input/actions?query=workflow%3A%22Build+and+Test%22)
+
 This package works on both **Android** and **iOS**
 
 ## Preview
