@@ -84,7 +84,9 @@
       "<rootDir>/lib/"
     ],
     "moduleNameMapper": {
-      "@tighten/react-native-time-input": ["<rootDir>/src/index"]
+      "@tighten/react-native-time-input": [
+        "<rootDir>/src/index"
+      ]
     }
   },
   "commitlint": {
@@ -153,5 +155,6 @@
         }
       ]
     ]
-  }
+  },
+  "version": "0.0.1"
 }
