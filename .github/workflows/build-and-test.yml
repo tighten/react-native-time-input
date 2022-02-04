@@ -41,8 +41,8 @@ jobs:
             ./example/yarn.lock
       - name: Install dependencies      
         run: |
-          yarn install --cwd example --frozen-lockfile
-          yarn install --frozen-lockfile
+          yarn install --cwd example
+          yarn install
       - name: Run unit tests and build
         run: |
           yarn test --coverage
