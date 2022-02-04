@@ -10,7 +10,7 @@ describe('<TimeInput />', () => {
     d = new Date();
     d.setHours(0, 0, 0, 0);
 
-    jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+    jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
     jest.mock('lodash/debounce', () => jest.fn((fn) => fn));
     jest.useFakeTimers('modern');
     jest.setSystemTime(d);
