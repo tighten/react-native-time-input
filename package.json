@@ -24,12 +24,11 @@
     "test": "jest",
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\" --ignore-pattern \"/coverage/\"",
-    "prepare": "bob build",
+    "prepare": "husky install && bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods",
-    "postinstall": "husky install"
+    "bootstrap": "yarn example && yarn && yarn pods"
   },
   "keywords": [
     "react-native",
@@ -156,5 +155,5 @@
       ]
     ]
   },
-  "version": "0.0.1"
+  "version": "1.0.0"
 }
